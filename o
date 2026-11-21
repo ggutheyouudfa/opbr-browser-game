@@ -1,0 +1,49 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+
+public class MatchSetupManager : MonoBehaviour
+{
+    public static MatchSetupManager Instance;
+
+    public List<FighterData> allUnlockedFighters; // Populate in Inspector
+    public FighterData selectedPlayer;
+    public List<FighterData> selectedAllies = new List<FighterData>();
+    public string selectedArenaScene = "Arena_01";
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Keeps selections across scenes
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void SelectPlayer(int fighterIndex)
+    {
+        selectedPlayer = allUnlockedFighters[fighterIndex];
+    }
+
+    public void AddAlly(int fighterIndex)
+    {
+        if (selectedAllies.Count < 3) // Limit to a 4v4 style team
+        {
+            selectedAllies.Add(allUnlockedFighters[fighterIndex]);
+        }
+    }
+
+    public void SelectArena(string sceneName)
+    {
+        selectedArenaScene = sceneName;
+    }
+
+    public void StartMatch()
+    {
+        SceneManager.LoadScene(selectedArenaScene);
+    }
+}
