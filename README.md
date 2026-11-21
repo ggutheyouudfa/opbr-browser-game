@@ -1,17 +1,15 @@
-# Grand Line: Crew Conquest
+# Grand Line Arena
 
-A polished browser-based pirate, Marine, and Revolutionary faction game.
+A polished, responsive One Piece-inspired browser fan game.
 
-## Features
-
-- A two-fighter character selection system
-- Animated faction battles
-- Character crews and crew recruitment
-- Ship upgrades and clickable island exploration
-- Responsive desktop and mobile layout
+Features:
+- Two-fighter battles
+- Pirates, Marines, and Revolutionaries
+- Animated combat
+- Crew recruitment
+- Ship unlocking
+- Island exploration
 
 ## Play
 
-Enable GitHub Pages for the `main` branch, root folder.
-
-https://ggutheyouudfa.github.io/opbr-browser-game/
+GitHub Pages: https://ggutheyouudfa.github.io/opbr-browser-game/
