@@ -1,13 +1,17 @@
 # Grand Line: Crew Conquest
 
-A fictional, browser-based pirate-versus-marine crew and exploration game.
-
-Open `index.html`, or enable GitHub Pages for this repository.
+A polished browser-based pirate, Marine, and Revolutionary faction game.
 
 ## Features
-- All characters unlocked
-- Choose two fighters for faction battles
-- Pirates fight Marines; Marines fight Pirates
-- Animated execution-style battle simulations
-- Create a crew and recruit members
-- Explore islands and unlock ships
+
+- A two-fighter character selection system
+- Animated faction battles
+- Character crews and crew recruitment
+- Ship upgrades and clickable island exploration
+- Responsive desktop and mobile layout
+
+## Play
+
+Enable GitHub Pages for the `main` branch, root folder.
+
+https://ggutheyouudfa.github.io/opbr-browser-game/
