@@ -1,0 +1,78 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+public class ArenaSpawner : MonoBehaviour
+{
+    public Transform playerSpawn;
+    public Transform[] allySpawns;
+
+    void Start()
+    {
+        var setup = MatchSetupManager.Instance;
+
+        // Spawn Player
+        if (setup.selectedPlayer != null)
+        {
+            GameObject player = Instantiate(setup.selectedPlayer.characterPrefab, playerSpawn.position, playerSpawn.rotation);
+            player.tag = "Player";
+        }
+
+        // Spawn AI Allies
+        for (int i = 0; i < setup.selectedAllies.Count; i++)
+        {
+            if (i < allySpawns.Length)
+            {
+                GameObject ally = Instantiate(setup.selectedAllies[i].characterPrefab, allySpawns[i].position, allySpawns[i].rotation);
+                ally.AddComponent<AIAllyController>();
+            }
+        }
+    }
+}
+
+[RequireComponent(typeof(NavMeshAgent))]
+public class AIAllyController : MonoBehaviour
+{
+    private NavMeshAgent agent;
+    public float attackRange = 2.5f;
+
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    void Update()
+    {
+        GameObject nearestEnemy = FindNearestEnemy();
+        if (nearestEnemy != null)
+        {
+            float distance = Vector3.Distance(transform.position, nearestEnemy.transform.position);
+            if (distance > attackRange)
+            {
+                agent.SetDestination(nearestEnemy.transform.position);
+            }
+            else
+            {
+                agent.ResetPath();
+                // Trigger 3D attack animation or hitbox here
+            }
+        }
+    }
+
+    GameObject FindNearestEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closest = null;
+        float minDistance = Mathf.Infinity;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float dist = Vector3.Distance(transform.position, enemy.transform.position);
+            if (dist < minDistance)
+            {
+                closest = enemy;
+                minDistance = dist;
+            }
+        }
+        return closest;
+    }
+}
